@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>El Acuario de Esperanza ✨</title>
-    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐤</text></svg>">
     <style>
         :root {
             --aqua-main: #98e2e6;
@@ -32,6 +32,39 @@
             background-image: url('arrecife.png'); 
         }
 
+        /* Estilos para el Reloj y Fecha */
+        #clock-container {
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            z-index: 100;
+            pointer-events: none;
+        }
+        #time {
+            font-size: 50px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            padding: 5px 30px;
+            border-radius: 25px;
+            border: 3px solid white;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        #date {
+            font-size: 20px;
+            margin-top: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            background: rgba(0, 0, 0, 0.15);
+            padding: 4px 15px;
+            border-radius: 12px;
+            display: inline-block;
+        }
 
         #bubbles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .bubble { position: absolute; bottom: -50px; background: rgba(255, 255, 255, 0.3); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 50%; animation: floatUp var(--duration) linear infinite; }
@@ -41,7 +74,58 @@
         #hamster-btn:hover { transform: scale(1.2) rotate(-10deg); }
 
         .signature { position: absolute; top: 25px; right: 35px; font-size: 26px; color: white; text-shadow: 3px 3px 0px var(--aqua-dark); font-weight: 700; z-index: 10; }
-        .main-container { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 25px; position: relative; z-index: 10; }
+                
+        .main-container { 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 25px; 
+            position: relative; 
+            z-index: 10; 
+            /* Hemos subido de -80px a -130px para elevarlo más */
+            margin-top: -130px; 
+        }
+
+        #custom-alert {
+    display: none;
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1e1e1e; /* Color oscuro como el de tu imagen */
+    color: white;
+    padding: 20px;
+    border-radius: 20px;
+    width: 300px;
+    z-index: 2000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    text-align: left;
+}
+
+.alert-header {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+#alert-text {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+#custom-alert button {
+    background: #a2d2ff;
+    color: #1e1e1e;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 
         .duck-logo { width: 140px; height: 140px; background: var(--duck-yellow); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 80px; border: 8px solid var(--white-sticker); box-shadow: 0 8px 15px rgba(0,0,0,0.1); position: relative; cursor: pointer; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .duck-logo:hover { transform: scale(1.1) rotate(-5deg); }
@@ -62,6 +146,19 @@
 </head>
 <body>
 
+        <div id="custom-alert">
+        <div class="alert-content">
+            <div class="alert-header">By Gonzalo</div>
+            <p id="alert-text"></p>
+            <button onclick="closeAlert()">Aceptar</button>
+        </div>
+    </div>
+
+        <!-- Reloj Centrado Superior -->
+    <div id="clock-container">
+        <div id="time">00:00:00</div><br>
+        <div id="date">Cargando fecha...</div>
+    </div>
     <div id="bg-container"></div>
     <div id="bubbles-container"></div>
     <div id="hamster-btn">🐹</div>
@@ -100,10 +197,38 @@
         };
 
         // ACCIÓN HÁMSTER
-        document.getElementById('hamster-btn').onclick = () => {
-            sndHamster.play();
-            alert("¡De tu hamster favorito desde Cordoba, para la pitufa mas guapa de todas en Asturias! 🐹✨");
-        };
+       document.getElementById('hamster-btn').onclick = () => {
+    if(typeof sndHamster !== 'undefined') sndHamster.play().catch(()=>{});
+    
+    document.getElementById('alert-text').innerText = "¡De tu hamster favorito desde Cordoba, para la pitufa más increible de Asturias! 🐹✨";
+    document.getElementById('custom-alert').style.display = "block";
+};
+
+function closeAlert() {
+    document.getElementById('custom-alert').style.display = "none";
+}
+
+
+            // Lógica del Reloj y Fecha
+    function updateClock() {
+        const now = new Date();
+        // Hora formateada
+        const h = String(now.getHours()).padStart(2, '0');
+        const m = String(now.getMinutes()).padStart(2, '0');
+        const s = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('time').innerText = `${h}:${m}:${s}`;
+        
+        // Fecha formateada (ej: Lunes, 22 de abril)
+        const options = { weekday: 'long', day: 'numeric', month: 'long' };
+        let dateStr = now.toLocaleDateString('es-ES', options);
+        // Primera letra en mayúscula
+        document.getElementById('date').innerText = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+    }
+
+    // Iniciar actualización cada segundo
+    setInterval(updateClock, 1000);
+    updateClock(); // Llamada inmediata al cargar
+
 
         // ACCIÓN PATITO
         document.querySelector('.duck-logo').onclick = () => {
