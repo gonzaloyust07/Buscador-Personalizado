@@ -203,11 +203,12 @@
             if (file) reader.readAsDataURL(file);
         });
 
-        function clearBackground() {
-            localStorage.removeItem('userBackground');
-            // Volvemos a poner la URL original
-            bgContainer.style.backgroundImage = "url('https://freepik.com')";
+            function clearBackground() {
+                localStorage.removeItem('userBackground');
+                // Volvemos a poner la imagen del arrecife
+                bgContainer.style.backgroundImage = "url('arrecife.jpg')";
         }
+
     </script>
 </body>
 </html>
