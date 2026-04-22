@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>El Acuario de Esperanza ✨</title>
-    <!-- Fuente corregida -->
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root {
@@ -22,7 +21,6 @@
             overflow: hidden;
         }
 
-        /* FONDO */
         #bg-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -30,148 +28,59 @@
             background-position: center;
             z-index: -1;
             filter: brightness(0.9);
-            background-image: url('arrecife.jpg'); 
+            /* AQUÍ PONES EL NOMBRE DEL ARCHIVO */
+            background-image: url('arrecife.png'); 
         }
 
-        /* BURBUJAS */
-        #bubbles-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .bubble {
-            position: absolute;
-            bottom: -50px;
-            background: rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            animation: floatUp var(--duration) linear infinite;
-        }
-        @keyframes floatUp {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 0.7; }
-            90% { opacity: 0.7; }
-            100% { transform: translateY(-110vh) translateX(var(--wobble)); opacity: 0; }
-        }
 
-        /* HÁMSTER */
-        #hamster-btn {
-            position: absolute;
-            top: 20px; left: 30px;
-            font-size: 45px;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            filter: drop-shadow(3px 3px 0px white);
-            z-index: 100;
-        }
+        #bubbles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .bubble { position: absolute; bottom: -50px; background: rgba(255, 255, 255, 0.3); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 50%; animation: floatUp var(--duration) linear infinite; }
+        @keyframes floatUp { 0% { transform: translateY(0) translateX(0); opacity: 0; } 10% { opacity: 0.7; } 100% { transform: translateY(-110vh) translateX(var(--wobble)); opacity: 0; } }
+
+        #hamster-btn { position: absolute; top: 20px; left: 30px; font-size: 45px; cursor: pointer; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); filter: drop-shadow(3px 3px 0px white); z-index: 100; }
         #hamster-btn:hover { transform: scale(1.2) rotate(-10deg); }
 
-        .signature {
-            position: absolute;
-            top: 25px; right: 35px;
-            font-size: 26px; color: white;
-            text-shadow: 3px 3px 0px var(--aqua-dark);
-            font-weight: 700; z-index: 10;
-        }
+        .signature { position: absolute; top: 25px; right: 35px; font-size: 26px; color: white; text-shadow: 3px 3px 0px var(--aqua-dark); font-weight: 700; z-index: 10; }
+        .main-container { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 25px; position: relative; z-index: 10; }
 
-        .main-container {
-            height: 100vh;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            gap: 25px; position: relative; z-index: 10;
-        }
-
-        .duck-logo {
-            width: 140px; height: 140px;
-            background: var(--duck-yellow);
-            border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            font-size: 80px; border: 8px solid var(--white-sticker);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-            position: relative; cursor: pointer;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        .duck-logo { width: 140px; height: 140px; background: var(--duck-yellow); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 80px; border: 8px solid var(--white-sticker); box-shadow: 0 8px 15px rgba(0,0,0,0.1); position: relative; cursor: pointer; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .duck-logo:hover { transform: scale(1.1) rotate(-5deg); }
-        .duck-logo::after {
-            content: 'CUAC!'; position: absolute; bottom: -10px; right: -20px;
-            background: var(--pink-stickers); font-size: 14px;
-            padding: 5px 10px; border-radius: 10px; font-weight: 700;
-            color: white; border: 3px solid white;
-        }
+        .duck-logo::after { content: 'CUAC!'; position: absolute; bottom: -10px; right: -20px; background: var(--pink-stickers); font-size: 14px; padding: 5px 10px; border-radius: 10px; font-weight: 700; color: white; border: 3px solid white; }
 
-        .search-wrapper {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            padding: 10px 30px; border-radius: 40px;
-            display: flex; align-items: center;
-            box-shadow: 0 10px 0px var(--aqua-dark);
-            width: 85%; max-width: 550px;
-            border: 4px solid var(--white-sticker);
-        }
-
-        input[type="text"] {
-            border: none; outline: none; background: none;
-            width: 100%; padding: 12px;
-            font-size: 20px; font-family: 'Quicksand', sans-serif;
-            font-weight: 700; color: var(--text-color);
-        }
+        .search-wrapper { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); padding: 10px 30px; border-radius: 40px; display: flex; align-items: center; box-shadow: 0 10px 0px var(--aqua-dark); width: 85%; max-width: 550px; border: 4px solid var(--white-sticker); }
+        input[type="text"] { border: none; outline: none; background: none; width: 100%; padding: 12px; font-size: 20px; font-family: 'Quicksand', sans-serif; font-weight: 700; color: var(--text-color); }
 
         .controls { display: flex; gap: 15px; }
-
-        .btn-sticker {
-            background-color: var(--pink-stickers);
-            color: white; border: 4px solid white;
-            padding: 12px 20px; border-radius: 25px;
-            cursor: pointer; font-weight: 700; font-size: 14px;
-            display: flex; align-items: center; gap: 8px;
-            box-shadow: 0 6px 0px rgba(0,0,0,0.1);
-            transition: all 0.2s ease;
-        }
+        .btn-sticker { background-color: var(--pink-stickers); color: white; border: 4px solid white; padding: 12px 20px; border-radius: 25px; cursor: pointer; font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 8px; box-shadow: 0 6px 0px rgba(0,0,0,0.1); transition: all 0.2s ease; }
         .btn-sticker:hover { transform: translateY(3px); box-shadow: 0 2px 0px rgba(0,0,0,0.1); }
         .btn-aqua { background-color: var(--aqua-dark); }
-        
         #file-input { display: none; }
 
-        @keyframes highlightText {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); color: #ff69b4; }
-            100% { transform: scale(1); }
-        }
+        @keyframes highlightText { 0% { transform: scale(1); } 50% { transform: scale(1.02); color: #ff69b4; } 100% { transform: scale(1); } }
         .highlight-msg { animation: highlightText 0.5s ease-in-out; }
-
-        .fade-in { animation: fadeIn 0.8s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <div id="bg-container"></div>
     <div id="bubbles-container"></div>
-    <div id="hamster-btn" title="¡Hazme clic!">🐹</div>
+    <div id="hamster-btn">🐹</div>
     <div class="signature">Esperanza’s World ✨</div>
 
-    <div class="main-container fade-in">
+    <div class="main-container">
         <div class="duck-logo">🐤</div>
-
-        <form class="search-wrapper" action="https://google.com" method="get">
-    <input type="text" id="search-input" name="q" placeholder="¿Qué buscamos hoy?" autocomplete="off">
-        </form>
+       <!-- La URL del action debe ser EXACTAMENTE esta -->
+<form class="search-wrapper" action="https://www.google.com/search" method="get" target="_blank">
+    <!-- El name="q" es OBLIGATORIO para que Google reciba la búsqueda -->
+    <input type="text" id="search-input" name="q" placeholder="¿Qué buscamos hoy, Esperanza?" autocomplete="off">
+</form>
 
 
         <div class="controls">
-            <label for="file-input" class="btn-sticker">
-                <span>🐰</span> Fondo
-            </label>
+            <label for="file-input" class="btn-sticker"><span>🐰</span> Fondo</label>
             <input type="file" id="file-input" accept="image/*">
-            
-            <button class="btn-sticker btn-aqua" onclick="triggerExtraBubbles()">
-                <span>🫧</span> Burbujas
-            </button>
-
-            <button class="btn-sticker btn-aqua" onclick="clearBackground()">
-                <span>🐱</span> Reset
-            </button>
+            <button class="btn-sticker btn-aqua" onclick="triggerExtraBubbles()"><span>🫧</span> Burbujas</button>
+            <button class="btn-sticker btn-aqua" onclick="clearBackground()"><span>🐱</span> Reset</button>
         </div>
     </div>
 
@@ -180,7 +89,6 @@
         const bgContainer = document.getElementById('bg-container');
         const searchInput = document.getElementById('search-input');
 
-        // Audios
         const sndDuck = new Audio('https://myinstants.com');
         const sndBubbles = new Audio('https://myinstants.com');
         const sndHamster = new Audio('https://myinstants.com');
@@ -191,13 +99,13 @@
             createBubbles(15);
         };
 
-        // Hámster
+        // ACCIÓN HÁMSTER
         document.getElementById('hamster-btn').onclick = () => {
             sndHamster.play();
             alert("¡De tu hamster favorito desde Cordoba, para la pitufa mas guapa de todas en Asturias! 🐹✨");
         };
 
-        // Patito
+        // ACCIÓN PATITO
         document.querySelector('.duck-logo').onclick = () => {
             sndDuck.play();
             const original = searchInput.placeholder;
@@ -209,7 +117,7 @@
             }, 4000);
         };
 
-        // Burbujas
+        // LÓGICA DE BURBUJAS
         function createBubbles(count) {
             const container = document.getElementById('bubbles-container');
             for (let i = 0; i < count; i++) {
@@ -242,19 +150,27 @@
             }
         }
 
-        // Fondo
+        // LÓGICA DE FONDO (MEJORADA)
         fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
             const reader = new FileReader();
-            reader.onloadend = () => {
-                bgContainer.style.backgroundImage = `url(${reader.result})`;
-                localStorage.setItem('userBackground', reader.result);
+            reader.onload = (event) => {
+                const imgData = event.target.result;
+                bgContainer.style.backgroundImage = `url(${imgData})`;
+                try {
+                    localStorage.setItem('userBackground', imgData);
+                } catch (e) {
+                    console.log("Imagen muy pesada para guardar, pero se muestra igual.");
+                }
             };
-            if (e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
+            reader.readAsDataURL(file);
         });
 
         function clearBackground() {
             localStorage.removeItem('userBackground');
-            bgContainer.style.backgroundImage = "url('arrecife.jpg')";
+            bgContainer.style.backgroundImage = "url('https://freepik.com')";
         }
     </script>
 </body>
