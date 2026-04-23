@@ -75,6 +75,7 @@
 
         .signature { position: absolute; top: 25px; right: 35px; font-size: 26px; color: white; text-shadow: 3px 3px 0px var(--aqua-dark); font-weight: 700; z-index: 10; }
                 
+        /* Busca esta clase y cambia solo el valor de margin-top */
         .main-container { 
             height: 100vh; 
             display: flex; 
@@ -84,9 +85,10 @@
             gap: 25px; 
             position: relative; 
             z-index: 10; 
-            /* Hemos subido de -80px a -130px para elevarlo más */
-            margin-top: -130px; 
+            /* Cambia el -130px por este valor positivo para que baje */
+            margin-top: 50px; 
         }
+
 
                 #custom-alert {
             display: none;
