@@ -184,9 +184,43 @@
         }
 
 
-        .duck-logo { width: 140px; height: 140px; background: var(--duck-yellow); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 80px; border: 8px solid var(--white-sticker); box-shadow: 0 8px 15px rgba(0,0,0,0.1); position: relative; cursor: pointer; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .duck-logo:hover { transform: scale(1.1) rotate(-5deg); }
-        .duck-logo::after { content: 'CUAC!'; position: absolute; bottom: -10px; right: -20px; background: var(--pink-stickers); font-size: 14px; padding: 5px 10px; border-radius: 10px; font-weight: 700; color: white; border: 3px solid white; }
+                .duck-logo { 
+            width: 140px; 
+            height: 140px; 
+            /* Cambia 'pato-lazo.jpg' por el nombre exacto de tu archivo */
+            background-image: url('pato-lazo.png'); 
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%; /* Esto lo hace redondo automáticamente */
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            border: 8px solid var(--white-sticker); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
+            position: relative; 
+            cursor: pointer; 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+
+        /* Mantenemos el efecto de movimiento al pasar el ratón */
+        .duck-logo:hover { 
+            transform: scale(1.1) rotate(-5deg); 
+        }
+
+        /* Mantenemos la pegatina de CUAC! */
+        .duck-logo::after { 
+            content: 'CUAC!'; 
+            position: absolute; 
+            bottom: -10px; 
+            right: -20px; 
+            background: var(--pink-stickers); 
+            font-size: 14px; 
+            padding: 5px 10px; 
+            border-radius: 10px; 
+            font-weight: 700; 
+            color: white; 
+            border: 3px solid white; 
+        }
 
         .search-wrapper { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); padding: 10px 30px; border-radius: 40px; display: flex; align-items: center; box-shadow: 0 10px 0px var(--aqua-dark); width: 85%; max-width: 550px; border: 4px solid var(--white-sticker); }
         input[type="text"] { border: none; outline: none; background: none; width: 100%; padding: 12px; font-size: 20px; font-family: 'Quicksand', sans-serif; font-weight: 700; color: var(--text-color); }
@@ -236,7 +270,8 @@
     <div class="signature">Esperanza’s World ✨</div>
 
     <div class="main-container">
-        <div class="duck-logo">🐤</div>
+<div class="duck-logo" onclick="quack()"></div>
+
        <!-- La URL del action debe ser EXACTAMENTE esta -->
 <form class="search-wrapper" action="https://www.google.com/search" method="get" target="_blank">
     <!-- El name="q" es OBLIGATORIO para que Google reciba la búsqueda -->
